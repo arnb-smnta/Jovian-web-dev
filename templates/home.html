@@ -27,7 +27,7 @@
         
       }
       div {
-        max-width:50%;
+        max-width:80%;
         margin:0 auto 0 auto;
       }
     </style>
@@ -37,7 +37,10 @@
     <h2 class="text-center">About Jovian</h2>
     <p class="lead mt-2 mb-4" >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut venenatis tellus in metus vulputate eu scelerisque. Donec ultrices tincidunt arcu non sodales neque. Vestibulum sed arcu non odio. Volutpat maecenas volutpat blandit aliquam etiam erat velit scelerisque. Faucibus interdum posuere lorem ipsum. Leo vel orci porta non pulvinar neque laoreet suspendisse interdum. Vestibulum lectus mauris ultrices eros in. Fringilla ut morbi tincidunt augue interdum velit euismod. Amet mattis vulputate enim nulla aliquet porttitor lacus. Justo eget magna fermentum iaculis eu. Augue eget arcu dictum varius. Tristique senectus et netus et.</p>
     <h3 class="text-center">Open Positions</h3>
-    <p>Todo - Show the Jobs here</p>
+    <p>{% for job in jobs %}
+      {% include "jobitem.html" %}
+      {% endfor %}
+    </p>
       <div style="text-align:center">
     <button type="button" class="btn btn-primary btn-lg">Contact Information</button>
         <p>Copyright 2023 ,Jovian</p>
