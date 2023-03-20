@@ -14,6 +14,11 @@ with engine.connect() as conn:
   result_all = result.all()
   print("type(result.all) : ", type(result.all()))
   print(type(result_all[0]))
-  first_result_dict = dict(result_all[0])
+  first_result_dict = result_all[0][0]
   print("type of first result", type(first_result_dict))
   print(first_result_dict)
+  result_dict={}
+  for result in result_all:
+    result_dict['id']=result[0]
+
+  print(result_dict)
