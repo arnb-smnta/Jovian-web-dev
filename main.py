@@ -2,27 +2,30 @@ from flask import Flask, render_template, jsonify
 
 app = Flask(__name__)
 
-JOBS = [{
-  'id': 1,
-  "title": "Data Scientist",
-  "location": 'Delhi,india',
-  "salary": 'Rs 1200000',
-}, {
-  "id": 2,
-  "title": "Data-Analyst",
-  "location": "Sanfransisco",
-  "salary": 'Rs 1400000',
-}, {
-  "id": 3,
-  "title": "Frontend-engineer",
-  "location": "Bangalore,India",
-  "salary": 'Rs 1500000'
-}, {
-  "id": 4,
-  "title": "Backend-Developer",
-  "location": "Netherlands",
-  "salary": '$120000'
-}]
+from database import engine
+
+
+def load_jobs_from_db():
+  with engine.connect() as conn:
+    result = conn.execute(text("select * from jobs"))
+  result_all = result.all()
+  result_dict = {}
+  result_ld = []
+  i = 0
+  for result in result_all:
+    result_dict['id'] = result[0]
+    result_dict['title'] = result[1]
+    result_dict['location'] = result[2]
+    result_dict["salary"] = result[3]
+    result_dict['currency'] = result[4]
+    result_dict['responsibilities'] = result[5]
+    result_dict['requirements'] = result[6]
+    print(result_dict)
+    result_ld.append(result_dict.copy())
+  return result_ld
+
+
+JOBS = load_jobs_from_db()
 
 
 @app.route("/")
