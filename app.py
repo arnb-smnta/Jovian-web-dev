@@ -2,7 +2,8 @@ from flask import Flask, render_template, jsonify
 
 app = Flask(__name__)
 
-from database import engine
+from database import engine, text
+
 
 def load_jobs_from_db():
   with engine.connect() as conn:
@@ -22,7 +23,10 @@ def load_jobs_from_db():
     print(result_dict)
     result_ld.append(result_dict.copy())
   return result_ld
-JOBS=load_jobs_from_db()
+
+
+JOBS = load_jobs_from_db()
+
 
 @app.route("/")
 def hello_world():
