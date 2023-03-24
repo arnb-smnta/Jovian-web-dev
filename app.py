@@ -28,17 +28,6 @@ def load_jobs_from_db():
 JOBS = load_jobs_from_db()
 
 
-def load_job_from_db(id):
-  with engine.connect() as conn:
-    result = conn.execute(text("SELECT * FROM jobs WHERE id = :val"),
-                          {"val": id})
-    row = result.all()
-    if len(row) == 0:
-      return None
-    else:
-      return dict(rows[0])
-
-
 @app.route("/")
 def hello_world():
   return render_template("home.html", jobs=JOBS)
@@ -47,12 +36,6 @@ def hello_world():
 @app.route("/api/jobs")
 def list_jobs():
   return jsonify(JOBS)
-
-
-@app.route("/api/job/<id>")
-def show_job(id):
-  job = load_job_from_db(id)
-  return jsonify(job)
 
 
 if __name__ == "__main__":
